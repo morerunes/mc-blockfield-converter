@@ -4,8 +4,8 @@ MC Block Field Converter
 TL;DR
 -----
 
-This program can be used to turn [this](/example.bf) 
-into this: ![example](/example.png), or vice versa.
+This program can be used to turn [this](example.bf) 
+into this: ![example](example.png), or vice versa.
 
 You can use the block field files one of two ways.
 
