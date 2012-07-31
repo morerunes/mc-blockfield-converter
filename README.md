@@ -4,8 +4,8 @@ MC Block Field Converter
 TL;DR
 -----
 
-This program can be used to turn [this](/example.bf) 
-into this: ![example](/example.png), or vice versa.
+This program can be used to turn [this](example.bf) 
+into this: ![example](example.png), or vice versa.
 
 You can use the block field files one of two ways.
 
@@ -14,7 +14,7 @@ You can use the block field files one of two ways.
    [MCP](http://mcp.ocean-labs.de/index.php/MCP_Releases)
 
 2. Package the included static libraries with your mod and
-   use the generateFromBFFile() method to generate your
+   use the `generateFromBFFile()` method to generate your
    structure from a file at runtime.
 
 If you don't want to manually create the block field files,
