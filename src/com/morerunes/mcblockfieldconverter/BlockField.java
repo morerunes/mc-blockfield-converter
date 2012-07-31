@@ -15,7 +15,7 @@ public class BlockField {
 	private char emptyBlockChar;
 
 	// Other info
-	private List<Object> blockTypes;
+	private List<BlockType> blockTypes;
 	private char[][][] blockField;
 	
 	public BlockField(int layers, int width, int length, String name) {
@@ -74,11 +74,11 @@ public class BlockField {
 		this.emptyBlockChar = emptyBlockChar;
 	}
 
-	public List<Object> getBlockTypes() {
+	public List<BlockType> getBlockTypes() {
 		return blockTypes;
 	}
 
-	public void setBlockTypes(List<Object> blockTypes) {
+	public void setBlockTypes(List<BlockType> blockTypes) {
 		this.blockTypes = blockTypes;
 	}
 

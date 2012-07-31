@@ -21,10 +21,12 @@ package com.morerunes.mcblockfieldconverter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BlockFieldConverter {
-	
+
 	BlockField field;
 
 	public BlockFieldConverter(String inputFileName)
@@ -33,8 +35,7 @@ public class BlockFieldConverter {
 	}
 
 	public BlockFieldConverter(File inputFile) throws FileNotFoundException {
-		FileInputStream inputStream = new FileInputStream(inputFile);
-		Scanner fileScanner = new Scanner(inputStream);
+		Scanner fileScanner = new Scanner(new FileInputStream(inputFile));
 
 		// Read field information
 		while (fileScanner.hasNextLine()) {
@@ -43,7 +44,7 @@ public class BlockFieldConverter {
 			if (line.startsWith("#")) {
 				// This line was a comment, skip it
 				continue;
-			} else if (!line.contains(":fieldinfo:")) {
+			} else if (!line.equals(":fieldinfo:")) {
 				// this line isn't important right now
 			} else {
 				// this line starts our field info
@@ -54,20 +55,22 @@ public class BlockFieldConverter {
 				char emptyBlockChar = '.';
 
 				line = fileScanner.nextLine();
-				while (!line.contains(":endfieldinfo:")) {
-					String[] split = line.split("=");
-					if (split[0].equals("layers")) {
-						layers = Integer.parseInt(split[1]);
-					} else if (split[0].equals("width")) {
-						width = Integer.parseInt(split[1]);
-					} else if (split[0].equals("length")) {
-						length = Integer.parseInt(split[1]);
-					} else if (split[0].equals("name")) {
-						name = split[1];
-					} else if (split[0].equals("emptyBlockChar")) {
-						emptyBlockChar = split[1].charAt(0);
+				while (!line.equals(":endfieldinfo:")) {
+					if (!line.startsWith("#") && line.length() != 0) {
+						String[] split = line.split("=");
+						if (split[0].equals("layers")) {
+							layers = Integer.parseInt(split[1]);
+						} else if (split[0].equals("width")) {
+							width = Integer.parseInt(split[1]);
+						} else if (split[0].equals("length")) {
+							length = Integer.parseInt(split[1]);
+						} else if (split[0].equals("name")) {
+							name = split[1];
+						} else if (split[0].equals("emptyBlockChar")) {
+							emptyBlockChar = split[1].charAt(0);
+						}
+						line = fileScanner.nextLine();
 					}
-					line = fileScanner.nextLine();
 				}
 
 				// Now that we read our fields, make sure we have the required
@@ -83,9 +86,43 @@ public class BlockFieldConverter {
 			}
 		}
 
+		// Reset the file
+		fileScanner.close();
+		fileScanner = new Scanner(new FileInputStream(inputFile));
+
+		// Read block type info
+		while (fileScanner.hasNextLine()) {
+			String line = fileScanner.nextLine();
+
+			if (line.startsWith("#")) {
+				// This line was a comment, skip it
+				continue;
+			} else if (!line.equals(":blocktypes:")) {
+				// this line isn't important right now
+			} else {
+				// this line starts our block types info
+				List<BlockType> blockTypes = new ArrayList<BlockType>();
+				line = fileScanner.nextLine();
+
+				while (!line.equals(":endblocktypes:")) {
+					if (!line.startsWith("#") && line.length() != 0) {
+						String[] split = line.split("\\s+");
+						blockTypes.add(new BlockType(Character.valueOf(split[0]
+								.charAt(0)), split[1], Integer
+								.valueOf(split[2])));
+						line = fileScanner.nextLine();
+					}
+				}
+
+				field.setBlockTypes(blockTypes);
+
+				break;
+			}
+		}
+
 		fileScanner.close();
 	}
-	
+
 	public String toString() {
 		return field.toString();
 	}
