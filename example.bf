@@ -14,10 +14,10 @@
 :fieldinfo:
 layers=21
 width=25
-length=18
+length=21
 # optional fields...
 # emptyBlockChar= 
-name=CompleteMess
+name=ElegantMansion
 :endfieldinfo:
 
 # blocktypes format = g blocktype x where
@@ -32,7 +32,7 @@ name=CompleteMess
 :blocktypes:
 p planks 1      # Wooden Planks
 g glass 0       # Glass Block
-b wood 2        # Birch Wood
+w wood 2        # Birch Wood
 f fence 0       # Fence Post
 :endblocktypes:
 
