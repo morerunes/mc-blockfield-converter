@@ -17,7 +17,7 @@ width=5
 length=5
 # optional fields...
 # emptyBlockChar= 
-# name=MyCoolThing
+name=CompleteMess
 :endfieldinfo:
 
 # blocktypes format = g blocktype x where
@@ -54,21 +54,19 @@ l leaves 0      # Forest Leaves
 #     d....
 #     *...d <- It will generate from where the star is
 
-:field:
+:fields:
 ..d..
 .d.d.
 ..d..
 d.d.d
 .d.d.
 
-:field:
 .d.d.
 d.d.d
 dd.dd
 .d.d.
 d.d.d
 
-:field:
 ..d..
 .d.d.
 ..d..
